@@ -5456,6 +5456,9 @@ static int janus_streaming_rtsp_connect_to_server(janus_streaming_mountpoint *mp
 			 * value for sending OPTIONS keepalives later on */
 			ka_timeout = atoi(timeout+attr_len);
 			JANUS_LOG(LOG_VERB, "  -- RTSP session timeout (video): %d\n", ka_timeout);
+		} else {
+			/* Default to 60s if not present */
+			ka_timeout = 60;
 		}
 		/* Get the RTP server port, which we'll need for the latching packet */
 		const char *vssrc = strstr(curldata->buffer, ";ssrc=");
